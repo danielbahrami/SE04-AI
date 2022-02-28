@@ -7,7 +7,8 @@ Environment = {
     'Current': A
 }
 
-def REFLEX_VACUUM_AGENT(loc_st):
+
+def reflex_vacuum_agent(loc_st):
     if loc_st[1] == 'Dirty':
         return 'Suck'
     if loc_st[0] == A:
@@ -15,11 +16,13 @@ def REFLEX_VACUUM_AGENT(loc_st):
     if loc_st[0] == B:
         return 'Left'
 
-def Sensors():
+
+def sensors():
     location = Environment['Current']
     return location, Environment[location]
 
-def Actuators(action):
+
+def actuators(action):
     location = Environment['Current']
     if action == 'Suck':
         Environment[location] = 'Clean'
@@ -28,16 +31,18 @@ def Actuators(action):
     elif action == 'Left' and location == B:
         Environment['Current'] = A
 
+
 def run(n):
     print('Current                     New')
     print('location    status  action  location    status')
     for i in range(1, n):
-        (location, status) = Sensors()
+        (location, status) = sensors()
         print("{:12s}{:8s}".format(location, status), end='')
-        action = REFLEX_VACUUM_AGENT(Sensors())
-        Actuators(action)
-        (location, status) = Sensors()
+        action = reflex_vacuum_agent(sensors())
+        actuators(action)
+        (location, status) = sensors()
         print("{:8s}{:12s}{:8s}".format(action, location, status))
+
 
 if __name__ == '__main__':
     run(10)
