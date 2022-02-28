@@ -1,6 +1,8 @@
 A = 'A'
 B = 'B'
+
 percepts = []
+
 table = {
     ((A, 'Clean'),): 'Right',
     ((A, 'Dirty'),): 'Suck',
@@ -13,20 +15,24 @@ table = {
     ((A, 'Clean'), (A, 'Dirty'), (B, 'Clean')): 'Left'
 }
 
-def LOOKUP(percepts, table):
+
+def lookup(percepts, table):
     action = table.get(tuple(percepts))
     return action
 
-def TABLE_DRIVEN_AGENT(percept):
+
+def table_driven_agent(percept):
     percepts.append(percept)
-    action = LOOKUP(percepts, table)
+    action = lookup(percepts, table)
     return action
+
 
 def run():
     print('Action\tPercepts')
-    print(TABLE_DRIVEN_AGENT((A, 'Clean')), '\t', percepts)
-    print(TABLE_DRIVEN_AGENT((A, 'Dirty')), '\t', percepts)
-    print(TABLE_DRIVEN_AGENT((B, 'Clean')), '\t', percepts)
+    print(table_driven_agent((A, 'Clean')), '\t', percepts)
+    print(table_driven_agent((A, 'Dirty')), '\t', percepts)
+    print(table_driven_agent((B, 'Clean')), '\t', percepts)
+
 
 if __name__ == '__main__':
     run()
