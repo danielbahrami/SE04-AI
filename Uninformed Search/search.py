@@ -24,16 +24,16 @@ Search the tree for the goal state and return path from initial state to goal st
 '''
 
 
-def TREE_SEARCH():
+def tree_search():
     fringe = []
     initial_node = Node(INITIAL_STATE)
-    fringe = INSERT(initial_node, fringe)
+    fringe = insert(initial_node, fringe)
     while fringe is not None:
-        node = REMOVE_FIRST(fringe)
+        node = remove_first(fringe)
         if node.STATE == GOAL_STATE:
             return node.path()
-        children = EXPAND(node)
-        fringe = INSERT_ALL(children, fringe)
+        children = expand(node)
+        fringe = insert_all(children, fringe)
         print("fringe: {}".format(fringe))
 
 
@@ -43,7 +43,7 @@ Return list of the successor nodes.
 '''
 
 
-def EXPAND(node):
+def expand(node):
     successors = []
     children = successor_fn(node.STATE)
     for child in children:
@@ -51,7 +51,7 @@ def EXPAND(node):
         s.STATE = child  # e.g. result = 'F' then 'G' from list ['F', 'G']
         s.PARENT_NODE = node
         s.DEPTH = node.DEPTH + 1
-        successors = INSERT(s, successors)
+        successors = insert(s, successors)
     return successors
 
 
@@ -60,7 +60,7 @@ Insert node in to the queue (fringe).
 '''
 
 
-def INSERT(node, queue):
+def insert(node, queue):
     queue.append(node)
     return queue
 
@@ -70,9 +70,9 @@ Insert list of nodes into the fringe
 '''
 
 
-def INSERT_ALL(list, queue):
+def insert_all(list, queue):
     for node in list:
-        INSERT(node, queue)
+        insert(node, queue)
     return queue
 
 
@@ -81,7 +81,7 @@ Removes and returns the first element from fringe
 '''
 
 
-def REMOVE_FIRST(queue):
+def remove_first(queue):
     return queue.pop(0)
 
 
@@ -107,7 +107,7 @@ Run tree search and display the nodes in the path to goal node
 
 
 def run():
-    path = TREE_SEARCH()
+    path = tree_search()
     print('Solution path:')
     for node in path:
         node.display()
