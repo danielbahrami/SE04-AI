@@ -55,21 +55,24 @@ def EXPAND(node):
 Insert node in to the queue (fringe).
 '''
 def INSERT(node, queue):
-
+    queue.append(node)
+    return queue
 
 
 '''
 Insert list of nodes into the fringe
 '''
 def INSERT_ALL(list, queue):
-
+    for node in list:
+        INSERT(node, queue)
+    return queue
 
 
 '''
 Removes and returns the first element from fringe
 '''
 def REMOVE_FIRST(queue):
-
+    return queue.pop(0)
 
 '''
 Successor function, mapping the nodes to its successors
