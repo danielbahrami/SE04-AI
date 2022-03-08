@@ -94,12 +94,17 @@ def successor_fn(state):  # Lookup list of successor states
     return STATE_SPACE[state]  # successor_fn( 'C' ) returns ['F', 'G']
 
 
-INITIAL_STATE = 'A'
-GOAL_STATE = 'J'
-STATE_SPACE = {'A': ['B', 'C'],
-               'B': ['D', 'E'], 'C': ['F', 'G'],
-               'D': [], 'E': [], 'F': [], 'G': ['H', 'I', 'J'],
-               'H': [], 'I': [], 'J': [], }
+INITIAL_STATE = ('A', 'Dirty', 'Dirty')
+GOAL_STATE = ('A', 'Clean', 'Clean')
+STATE_SPACE = {('A', 'Dirty', 'Dirty'): [('A', 'Clean', 'Dirty'), ('A', 'Dirty', 'Dirty'), ('B', 'Dirty', 'Dirty')],
+               ('A', 'Clean', 'Dirty'): [('A', 'Clean', 'Dirty'), ('A', 'Clean', 'Dirty'), ('B', 'Clean', 'Dirty')],
+               ('A', 'Dirty', 'Clean'): [('A', 'Clean', 'Clean'), ('A', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean')],
+               ('A', 'Clean', 'Clean'): [('A', 'Clean', 'Clean'), ('A', 'Clean', 'Clean'), ('B', 'Clean', 'Clean')],
+               ('B', 'Dirty', 'Dirty'): [('A', 'Dirty', 'Dirty'), ('B', 'Dirty', 'Clean'), ('B', 'Dirty', 'Dirty')],
+               ('B', 'Clean', 'Dirty'): [('A', 'Clean', 'Dirty'), ('B', 'Clean', 'Clean'), ('B', 'Clean', 'Dirty')],
+               ('B', 'Dirty', 'Clean'): [('A', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean')],
+               ('B', 'Clean', 'Clean'): [('A', 'Clean', 'Clean'), ('B', 'Clean', 'Clean'), ('B', 'Clean', 'Clean')],
+               }
 
 '''
 Run tree search and display the nodes in the path to goal node
