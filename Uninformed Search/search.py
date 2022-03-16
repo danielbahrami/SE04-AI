@@ -82,7 +82,8 @@ Removes and returns the first element from fringe
 
 
 def remove_first(queue):
-    return queue.pop(0)
+    if len(queue) != 0:
+        return queue.pop(0)
 
 
 '''
