@@ -30,7 +30,7 @@ def tree_search():
     fringe = insert(initial_node, fringe)
     while fringe is not None:
         node = remove_first(fringe)
-        if node.STATE == GOAL_STATE:
+        if node.STATE in GOAL_STATE:
             return node.path()
         children = expand(node)
         fringe = insert_all(children, fringe)
