@@ -82,7 +82,8 @@ Removes and returns the first element from fringe
 
 
 def remove_first(queue):
-    return queue.pop(0)
+    if len(queue) != 0:
+        return queue.pop(0)
 
 
 '''
@@ -94,16 +95,24 @@ def successor_fn(state):  # Lookup list of successor states
     return STATE_SPACE[state]  # successor_fn( 'C' ) returns ['F', 'G']
 
 
-INITIAL_STATE = ('A', 'Dirty', 'Dirty')
-GOAL_STATE = ('A', 'Clean', 'Clean')
-STATE_SPACE = {('A', 'Dirty', 'Dirty'): [('A', 'Clean', 'Dirty'), ('A', 'Dirty', 'Dirty'), ('B', 'Dirty', 'Dirty')],
-               ('A', 'Clean', 'Dirty'): [('A', 'Clean', 'Dirty'), ('A', 'Clean', 'Dirty'), ('B', 'Clean', 'Dirty')],
-               ('A', 'Dirty', 'Clean'): [('A', 'Clean', 'Clean'), ('A', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean')],
-               ('A', 'Clean', 'Clean'): [('A', 'Clean', 'Clean'), ('A', 'Clean', 'Clean'), ('B', 'Clean', 'Clean')],
-               ('B', 'Dirty', 'Dirty'): [('A', 'Dirty', 'Dirty'), ('B', 'Dirty', 'Clean'), ('B', 'Dirty', 'Dirty')],
-               ('B', 'Clean', 'Dirty'): [('A', 'Clean', 'Dirty'), ('B', 'Clean', 'Clean'), ('B', 'Clean', 'Dirty')],
-               ('B', 'Dirty', 'Clean'): [('A', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean')],
-               ('B', 'Clean', 'Clean'): [('A', 'Clean', 'Clean'), ('B', 'Clean', 'Clean'), ('B', 'Clean', 'Clean')],
+INITIAL_STATE = ('A', 6, 0)
+GOAL_STATE = [('K', 0, 6), ('L', 0, 5), ('L', 0, 3)]
+STATE_SPACE = {('A', 6, 0): [('B', 5, 1), ('C', 5, 2), ('D', 2, 4)],
+               ('D', 2, 4): [('H', 1, 1), ('I', 2, 4), ('J', 1, 2)],
+               ('B', 5, 1): [('F', 5, 5), ('E', 4, 4)],
+               ('E', 4, 4): [('G', 4, 2), ('H', 1, 3)],
+               ('E', 4, 1): [('G', 4, 2), ('H', 1, 3)],
+               ('H', 1, 1): [('K', 0, 6), ('L', 0, 5)],
+               ('H', 1, 3): [('K', 0, 6), ('L', 0, 5)],
+               ('C', 5, 2): [('E', 4, 1)],
+               ('F', 5, 5): [('G', 4, 1)],
+               ('G', 4, 2): [('K', 0, 6)],
+               ('G', 4, 1): [('K', 0, 6)],
+               ('I', 2, 4): [('L', 0, 3)],
+               ('J', 1, 2): [],
+               ('K', 0, 6): [],
+               ('L', 0, 3): [],
+               ('L', 0, 5): []
                }
 
 '''
