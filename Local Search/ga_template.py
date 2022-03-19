@@ -42,21 +42,41 @@ def print_population(population, fitness_fn):
 
 
 def reproduce(mother, father):
-    '''
+    """
     Reproduce two individuals with single-point crossover
     Return the child individual
-    '''
+    """
+
+    number = random.randint(0, len(father) - 1)
+    child = [0] * len(father)
+
+    for i in range(0, number):
+        child[i] = mother[i]
+
+    for i in range(number, 0):
+        child[i] = father[i]
 
     # return child
+    return tuple(child)
 
 
 def mutate(individual):
-    '''
+    """
     Mutate an individual by randomly assigning one of its bits
     Return the mutated individual
-    '''
+    """
 
-    # return mutation
+    if len(individual) > 0:
+        number = random.randint(0, len(individual) - 1)
+        mutation = [0] * len(individual)
+        for i in range(0, len(individual)):
+            if i != number:
+                mutation[i] = individual[i]
+            else:
+                mutation[i] = random.randint(0, 1)
+
+        # return mutation
+        return tuple(mutation)
 
 
 def random_selection(population, fitness_fn):
@@ -72,12 +92,33 @@ def random_selection(population, fitness_fn):
     # want to do it in the same order. So let's convert it temporarily to a
     # list.
     ordered_population = list(population)
+    total_fitness = 0
+    fitness_population = []
+
+    for individual in ordered_population:
+        total_fitness += fitness_fn(individual)
+
+    for individual in ordered_population:
+        fitness_population.append(fitness_fn(individual))
+
+    stagnate_value = random.randint(0, 100)
+    mother_index = 0
+    father_index = fitness_population.index(max(fitness_population))
+
+    fitness_population.remove(max(fitness_population))
+
+    if stagnate_value > p_mutation * 100:
+        mother_index = fitness_population.index(max(fitness_population))
+    else:
+        while mother_index != father_index:
+            mother_index = random.randint(0, len(ordered_population))
 
     # return selected
+    return ordered_population[mother_index], ordered_population[father_index]
 
 
 def fitness_function(individual):
-    '''
+    """
     Computes the decimal value of the individual
     Return the fitness level of the individual
 
@@ -87,9 +128,16 @@ def fitness_function(individual):
     enumerate((4, 6, 2, 8)) -> [(0, 4), (1, 6), (2, 2), (3, 8)]
 
     enumerate(reversed((1, 1, 0))) -> [(0, 0), (1, 1), (2, 1)]
-    '''
+    """
+
+    reversed_individuals = individual[::-1]
+    fitness = 0
+
+    for i in range(0, len(reversed_individuals)):
+        fitness += (2 ** i) * reversed_individuals[i]
 
     # return fitness
+    return fitness
 
 
 def get_fittest_individual(iterable, func):
@@ -97,10 +145,10 @@ def get_fittest_individual(iterable, func):
 
 
 def get_initial_population(n, count):
-    '''
+    """
     Randomly generate count individuals of length n
     Note since its a set it disregards duplicate elements.
-    '''
+    """
     return set([
         tuple(random.randint(0, 1) for _ in range(n))
         for _ in range(count)
@@ -117,7 +165,7 @@ def main():
         (0, 1, 0),
         (1, 0, 0)
     }
-    # initial_population = get_initial_population(3, 4)
+    initial_population = get_initial_population(3, 4)
 
     fittest = genetic_algorithm(initial_population, fitness_function, minimal_fitness)
     print('Fittest Individual: ' + str(fittest))
@@ -125,4 +173,4 @@ def main():
 
 if __name__ == '__main__':
     pass
-    # main()
+    main()
