@@ -1,6 +1,5 @@
 import random
 
-
 p_mutation = 0.2
 num_of_generations = 30
 
@@ -48,7 +47,7 @@ def reproduce(mother, father):
     Return the child individual
     '''
 
-    #return child
+    # return child
 
 
 def mutate(individual):
@@ -57,7 +56,7 @@ def mutate(individual):
     Return the mutated individual
     '''
 
-    #return mutation
+    # return mutation
 
 
 def random_selection(population, fitness_fn):
@@ -74,8 +73,7 @@ def random_selection(population, fitness_fn):
     # list.
     ordered_population = list(population)
 
-
-    #return selected
+    # return selected
 
 
 def fitness_function(individual):
@@ -91,7 +89,7 @@ def fitness_function(individual):
     enumerate(reversed((1, 1, 0))) -> [(0, 0), (1, 1), (2, 1)]
     '''
 
-    #return fitness
+    # return fitness
 
 
 def get_fittest_individual(iterable, func):
@@ -119,7 +117,7 @@ def main():
         (0, 1, 0),
         (1, 0, 0)
     }
-    #initial_population = get_initial_population(3, 4)
+    # initial_population = get_initial_population(3, 4)
 
     fittest = genetic_algorithm(initial_population, fitness_function, minimal_fitness)
     print('Fittest Individual: ' + str(fittest))
@@ -127,4 +125,4 @@ def main():
 
 if __name__ == '__main__':
     pass
-    #main()
+    # main()
