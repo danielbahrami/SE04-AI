@@ -99,16 +99,16 @@ def successor_fn(state):  # Lookup list of successor states
     return STATE_SPACE[state]  # successor_fn( 'C' ) returns ['F', 'G']
 
 
-INITIAL_STATE = ('A', 'Dirty', 'Dirty', 0)
-GOAL_STATE = ('A', 'Clean', 'Clean', 0)
-STATE_SPACE = {('A', 'Dirty', 'Dirty', 1): [('A', 'Clean', 'Dirty', 1), ('A', 'Dirty', 'Dirty', 1), ('B', 'Dirty', 'Dirty', 1)],
-               ('A', 'Clean', 'Dirty', 1): [('A', 'Clean', 'Dirty', 1), ('A', 'Clean', 'Dirty', 1), ('B', 'Clean', 'Dirty', 1)],
-               ('A', 'Dirty', 'Clean', 1): [('A', 'Clean', 'Clean', 1), ('A', 'Dirty', 'Clean', 1), ('B', 'Dirty', 'Clean', 1)],
-               ('A', 'Clean', 'Clean', 1): [('A', 'Clean', 'Clean', 1), ('A', 'Clean', 'Clean', 1), ('B', 'Clean', 'Clean', 1)],
-               ('B', 'Dirty', 'Dirty', 1): [('A', 'Dirty', 'Dirty', 1), ('B', 'Dirty', 'Clean', 1), ('B', 'Dirty', 'Dirty', 1)],
-               ('B', 'Clean', 'Dirty', 1): [('A', 'Clean', 'Dirty', 1), ('B', 'Clean', 'Clean', 1), ('B', 'Clean', 'Dirty', 1)],
-               ('B', 'Dirty', 'Clean', 1): [('A', 'Dirty', 'Clean', 1), ('B', 'Dirty', 'Clean', 1), ('B', 'Dirty', 'Clean', 1)],
-               ('B', 'Clean', 'Clean', 1): [('A', 'Clean', 'Clean', 1), ('B', 'Clean', 'Clean', 1), ('B', 'Clean', 'Clean', 1)],
+INITIAL_STATE = (('A', 'Dirty', 'Dirty'), 3, 0)
+GOAL_STATE = [(('A', 'Clean', 'Clean'), 0, 1), (('B', 'Clean', 'Clean'), 0, 1)]
+STATE_SPACE = {(('A', 'Dirty', 'Dirty'), 3, 0): [(('A', 'Clean', 'Dirty'), 2, 1), (('B', 'Dirty', 'Dirty'), 3, 2)],
+               (('A', 'Clean', 'Dirty'), 2, 1): [(('B', 'Clean', 'Dirty'), 1, 2)],
+               (('A', 'Dirty', 'Clean'), 1, 2): [(('A', 'Clean', 'Clean'), 0, 1)],
+               (('B', 'Dirty', 'Dirty'), 3, 2): [(('B', 'Dirty', 'Clean'), 2, 1)],
+               (('B', 'Dirty', 'Clean'), 2, 1): [(('A', 'Dirty', 'Clean'), 1, 2)],
+               (('B', 'Clean', 'Dirty'), 1, 2): [(('B', 'Clean', 'Clean'), 0, 1)],
+               (('A', 'Clean', 'Clean'), 0, 1): [],
+               (('B', 'Clean', 'Clean'), 0, 1): []
                }
 
 '''
