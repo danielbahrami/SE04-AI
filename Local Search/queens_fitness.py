@@ -5,11 +5,11 @@ Chessboard module
 
 
 def fitness_fn_negative(individual):
-    '''
+    """
     Compute the number of conflicting pairs, negated.
     For a solution with 5 conflicting pairs the return value is -5, so it can
     be maximized to 0.
-    '''
+    """
 
     n = len(individual)
     fitness = 0
@@ -36,9 +36,9 @@ def fitness_fn_negative(individual):
 
 
 def fitness_fn_positive(state):
-    '''
+    """
     Compute the number of non-conflicting pairs.
-    '''
+    """
 
     def conflicted(state, row, col):
         for c in range(col):
