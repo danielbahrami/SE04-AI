@@ -1,5 +1,4 @@
 def minmax_decision(state):
-
     def max_value(state):
         if is_terminal(state):
             return utility_of(state)
@@ -22,31 +21,77 @@ def minmax_decision(state):
     return action
 
 
+"""
+returns True if the state is either a win or a tie (board full)
+:param state: State of the checkerboard. Ex: [0; 1; 2; 3; X; 5; 6; 7; 8]
+:return:
+"""
+
+
 def is_terminal(state):
-    """
-    returns True if the state is either a win or a tie (board full)
-    :param state: State of the checkerboard. Ex: [0; 1; 2; 3; X; 5; 6; 7; 8]
-    :return:
-    """
-    pass
+    if state.count('X') >= 3 and check_terminal(state, 'X'):
+        return True
+    if state.count('O') >= 3 and check_terminal(state, 'O'):
+        return True
+    if state.count('X') + state.count('O') >= len(state):
+        return True
+    return False
+
+
+def check_terminal(state, character):
+    check_character = [i for i in range(0, 9) if state[i] == character]
+    check_board = {
+        0: [0, 4, 8],
+        1: [2, 4, 6],
+        2: [0, 1, 2],
+        3: [0, 3, 6],
+        4: [6, 7, 8],
+        5: [2, 5, 8],
+        6: [3, 4, 5],
+        7: [1, 4, 7]
+    }
+    for i in range(0, len(check_board)):
+        if len([value for value in check_board[i] if value in check_character]) == 3:
+            return True
+    return False
+
+
+"""
+returns +1 if winner is X (MAX player), -1 if winner is O (MIN player), or 0 otherwise
+:param state: State of the checkerboard. Ex: [0; 1; 2; 3; X; 5; 6; 7; 8]
+:return:
+"""
 
 
 def utility_of(state):
-    """
-    returns +1 if winner is X (MAX player), -1 if winner is O (MIN player), or 0 otherwise
-    :param state: State of the checkerboard. Ex: [0; 1; 2; 3; X; 5; 6; 7; 8]
-    :return:
-    """
-    pass
+    if check_terminal(state, 'X'):
+        return 1
+    if check_terminal(state, 'O'):
+        return -1
+    return 0
+
+
+"""
+returns a list of tuples (move, state) as shown in the exercise slides
+:param state: State of the checkerboard. Ex: [0; 1; 2; 3; X; 5; 6; 7; 8]
+:return:
+"""
 
 
 def successors_of(state):
-    """
-    returns a list of tuples (move, state) as shown in the exercise slides
-    :param state: State of the checkerboard. Ex: [0; 1; 2; 3; X; 5; 6; 7; 8]
-    :return:
-    """
-    pass
+    possible_moves = []
+    for i in range(0, 9):
+        if state[i] != 'X' and state[i] != 'O':
+            played_moves = []
+            for j in range(0, 9):
+                if j == i and state.count('X') == state.count('O'):
+                    played_moves.append('X')
+                elif j == i and state.count('X') > state.count('O'):
+                    played_moves.append('O')
+                else:
+                    played_moves.append(state[j])
+            possible_moves.append((i, played_moves.copy()))
+    return possible_moves
 
 
 def display(state):
