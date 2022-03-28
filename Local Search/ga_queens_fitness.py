@@ -1,4 +1,5 @@
 import random
+from queens_fitness import *
 
 p_mutation = 0.2
 num_of_generations = 30
@@ -160,15 +161,16 @@ def main():
 
     # Curly brackets also creates a set, if there isn't a colon to indicate a dictionary
     initial_population = {
-        (1, 1, 0),
-        (0, 0, 0),
-        (0, 1, 0),
-        (1, 0, 0)
+        (5, 6, 2, 3, 5, 8, 6, 1),
+        (7, 3, 6, 6, 4, 6, 8, 1)
     }
     initial_population = get_initial_population(3, 4)
 
     fittest = genetic_algorithm(initial_population, fitness_function, minimal_fitness)
     print('Fittest Individual: ' + str(fittest))
+
+
+# fitness_fn_negative()
 
 
 if __name__ == '__main__':
