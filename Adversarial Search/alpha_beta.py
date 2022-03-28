@@ -32,15 +32,31 @@ def alpha_beta_decision(state):
 
 
 def is_terminal(state):
-    pass
+    if state.count(1) == len(state):
+        return True
+    return False
 
 
 def utility_of(state):
-    pass
+    if len(state) % 2 == 0:
+        return -1
+    return 1
 
 
 def successors_of(state):
-    pass
+    possible_moves = []
+    for i in range(0, len(state)):
+        if state[i] != 1:
+            played_moves = []
+            for j in range(1, int(state[i] / 2) + 1):
+                played_moves.append([state[i] - j, j])
+            new_state = state.copy()
+            new_state.remove(state[i])
+            for k in played_moves:
+                k = k + new_state
+                if k not in possible_moves:
+                    possible_moves.append(k)
+    return possible_moves
 
 
 def argmax(iterable, func):
