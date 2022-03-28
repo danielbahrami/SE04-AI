@@ -53,10 +53,10 @@ def computer_select_pile(state):
 
 
 def user_select_pile(list_of_piles):
-    '''
+    """
     Given a list of piles, asks the user to select a pile and then a split.
     Then returns the new list of piles.
-    '''
+    """
     print("\n    Current piles: {}".format(list_of_piles))
 
     i = -1
