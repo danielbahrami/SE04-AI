@@ -1,6 +1,3 @@
-from random import shuffle
-
-
 class CSP:
     def __init__(self, variables, domains, neighbours, constraints):
         self.variables = variables
@@ -37,7 +34,6 @@ class CSP:
 
     def order_domain_values(self, variable, assignment):
         all_values = self.domains[variable][:]
-        # shuffle(all_values)
         return all_values
 
     def is_consistent(self, variable, value, assignment):
@@ -55,49 +51,67 @@ class CSP:
         return True
 
 
-def create_australia_csp():
-    wa, q, t, v, sa, nt, nsw = 'WA', 'Q', 'T', 'V', 'SA', 'NT', 'NSW'
-    values = ['Red', 'Green', 'Blue']
-    variables = [wa, q, t, v, sa, nt, nsw]
+def create_south_america_csp():
+    ar, bo, br, ch, co, ec, fr, gu, pa, pe, su, ur, ve = 'Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia',\
+                                                         'Ecuador', 'French Guyana', 'Guyana', 'Paraguay', 'Peru',\
+                                                         'Suriname', 'Uruguay', 'Venezuela'
+    values = ['Red', 'Green', 'Blue', 'Yellow']
+    variables = [ar, bo, br, ch, co, ec, fr, gu, pa, pe, su, ur, ve]
     domains = {
-        wa: values[:],
-        q: values[:],
-        t: values[:],
-        v: values[:],
-        sa: values[:],
-        nt: values[:],
-        nsw: values[:],
+        ar: values[:],
+        bo: values[:],
+        br: values[:],
+        ch: values[:],
+        co: values[:],
+        ec: values[:],
+        fr: values[:],
+        gu: values[:],
+        pa: values[:],
+        pe: values[:],
+        su: values[:],
+        ur: values[:],
+        ve: values[:]
     }
     neighbours = {
-        wa: [sa, nt],
-        q: [sa, nt, nsw],
-        t: [],
-        v: [sa, nsw],
-        sa: [wa, nt, q, nsw, v],
-        nt: [sa, wa, q],
-        nsw: [sa, q, v],
+        ar: [bo, ch, pa, ur],
+        bo: [ar, br, ch, pa, pe],
+        br: [ar, bo, co, fr, gu, pa, pe, su, ur, ve],
+        ch: [ar, bo, pe],
+        co: [br, ec, pe, ve],
+        ec: [co, pe],
+        fr: [br, su],
+        gu: [br, su],
+        pa: [ar, bo, br],
+        pe: [bo, br, ch, co, ec],
+        su: [br, fr, gu],
+        ur: [ar, br],
+        ve: [br, co, gu]
     }
 
     def constraint_function(first_variable, first_value, second_variable, second_value):
         return first_value != second_value
 
     constraints = {
-        wa: constraint_function,
-        q: constraint_function,
-        t: constraint_function,
-        v: constraint_function,
-        sa: constraint_function,
-        nt: constraint_function,
-        nsw: constraint_function,
+        ar: constraint_function,
+        bo: constraint_function,
+        br: constraint_function,
+        ch: constraint_function,
+        co: constraint_function,
+        ec: constraint_function,
+        fr: constraint_function,
+        gu: constraint_function,
+        pa: constraint_function,
+        pe: constraint_function,
+        su: constraint_function,
+        ur: constraint_function,
+        ve: constraint_function
     }
 
     return CSP(variables, domains, neighbours, constraints)
 
 
 if __name__ == '__main__':
-    australia = create_australia_csp()
-    result = australia.backtracking_search()
+    south_america = create_south_america_csp()
+    result = south_america.backtracking_search()
     for area, color in sorted(result.items()):
         print("{}: {}".format(area, color))
-
-    # Check at https://mapchart.net/australia.html
