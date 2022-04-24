@@ -1,5 +1,5 @@
 import random
-from queens_fitness import *
+import queens_fitness
 
 p_mutation = 0.2
 num_of_generations = 30
@@ -166,11 +166,8 @@ def main():
     }
     initial_population = get_initial_population(3, 4)
 
-    fittest = genetic_algorithm(initial_population, fitness_function, minimal_fitness)
-    print('Fittest Individual: ' + str(fittest))
-
-
-# fitness_fn_negative()
+    fittest = genetic_algorithm(initial_population, queens_fitness.fitness_fn_negative, minimal_fitness)
+    print('Fittest Individual: ' + str(fittest) + " fitness: " + str(queens_fitness.fitness_fn_negative(fittest)))
 
 
 if __name__ == '__main__':
