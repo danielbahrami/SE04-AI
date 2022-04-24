@@ -52,8 +52,8 @@ class CSP:
 
 
 def create_south_america_csp():
-    ar, bo, br, ch, co, ec, fr, gu, pa, pe, su, ur, ve = 'Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia',\
-                                                         'Ecuador', 'French Guyana', 'Guyana', 'Paraguay', 'Peru',\
+    ar, bo, br, ch, co, ec, fr, gu, pa, pe, su, ur, ve = 'Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', \
+                                                         'Ecuador', 'French Guyana', 'Guyana', 'Paraguay', 'Peru', \
                                                          'Suriname', 'Uruguay', 'Venezuela'
     values = ['Red', 'Green', 'Blue', 'Yellow']
     variables = [ar, bo, br, ch, co, ec, fr, gu, pa, pe, su, ur, ve]
