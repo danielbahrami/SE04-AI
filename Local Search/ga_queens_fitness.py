@@ -1,4 +1,5 @@
 import random
+
 import queens_fitness
 
 p_mutation = 0.2
